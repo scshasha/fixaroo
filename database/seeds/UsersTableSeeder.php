@@ -20,18 +20,18 @@ class UsersTableSeeder extends Seeder
         // Create Admin User
         User::create([
             'name' => $faker->firstName,
-            'email' => 'admin@supporttickets.com',
+            'email' => 'admin@example.com',
             'is_admin' => 1,
-            'password' => 'password',
+            'password' => 'fixaroo',
         ]);
 
         // Create 5 Agent Users
         for($i=1;$i <= 5;$i++) {
             User::create([
                 'name' => $faker->firstName,
-                'email' => sprintf('agent%d@supporttickets.com', $i),
+                'email' => sprintf('fixaroo%d@example.com', $i),
                 'is_admin' => 2,
-                'password' => 'password',
+                'password' => 'fixaroo',
             ]);
         }
     }
