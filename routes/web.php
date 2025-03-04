@@ -1,6 +1,5 @@
 <?php
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -24,13 +23,13 @@ Route::post('comment', 'CommentsController@storeComment')->name('create comment'
 // Show a Ticket
 Route::get('tickets/{ticket_id}', 'TicketsController@show')->name('ticket_show');
 
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('tickets', 'TicketsController@index');
     Route::get('tickets/assigned/{id}', 'TicketsController@getAgentTickets');
     Route::post('tickets/close/{ticket_id}', 'TicketsController@close')->name('close');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('tickets', 'TicketsController@index')->name('tickets');
     Route::post('tickets/close/{ticket_id}', 'TicketsController@close')->name('close');
     Route::get('tickets/edit/{ticket_id}', 'TicketsController@edit')->name('edit');

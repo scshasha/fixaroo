@@ -10,7 +10,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TicketStatusMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     protected $data = [];
 

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<ruleset name="Laravel">
+    <description>Laravel Coding Standards</description>
+
+    <!-- Define the coding standard to follow -->
+    <rule ref="PSR12"/>
+
+    <!-- Exclude some folders or files from the checks -->
+    <exclude-pattern>*/storage/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <!-- Add custom rules if needed -->
+    <file>app</file>
+    <file>routes</file>
+    <file>database</file>
+</ruleset>

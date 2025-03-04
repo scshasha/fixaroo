@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class TicketsController extends Controller
 {
-
-
     public function __construct()
     {
         // $this->middleware('auth'); Need to allow non-registered users to make and view thier tickets.
@@ -29,7 +27,7 @@ class TicketsController extends Controller
                 $agents = User::all()->where('is_admin', 2);
 
                 return view('admin.tickets', compact('tickets', 'categories', 'agents'));
-            } elseif(Auth::user()->is_admin === 2) {
+            } elseif (Auth::user()->is_admin === 2) {
                 $tickets = Ticket::where('user_id', Auth::user()->id)->paginate(10);
                 $categories = Category::all();
 
@@ -48,7 +46,7 @@ class TicketsController extends Controller
     }
 
 
-    
+
     // public function store(Request $request, AppMailer $mailer) // No longer using AppMailer::class
     public function store(Request $request)
     {
@@ -57,10 +55,10 @@ class TicketsController extends Controller
         // Get Administrator E-mails to Notify
         $a = User::all()->where('is_admin', 1);
 
-        foreach($a as $b) {
+        foreach ($a as $b) {
             $to[] = $b->email;
         }
-        
+
         // Validate Input
         $this->validate($request, [
             'title'     => 'required',
@@ -68,7 +66,7 @@ class TicketsController extends Controller
             'author_email'   =>  'required|email',
             'message'  =>  'required',
         ]);
-        
+
         $input = [
             'title'         =>  $request->input('title'),
             'ticket_id'     =>  strtoupper(str_random(15)),
@@ -85,30 +83,30 @@ class TicketsController extends Controller
 
         /**
          * Send notification to an administrator about the newly created ticket.
-         * 
+         *
          * @TODO: Update implementation. Although for now we are assuming that there is only one administrator
          *        We need to update the e-mailing functionality to also work for multiple admins.
          */
 
         $adminEmail = User::where('is_admin', 1)->firstOrFail()->email;
         // dd($adminEmail);
-        $data=[
+        $data = [
             'email_template' => 'admin','email_subject' => 'New support ticket.'
         ];
 
         // Send notification to administrator.
-        if ($adminEmail) { 
-            Mail::to($adminEmail)->send(new TicketCreatedMail($data, $ticket)); 
+        if ($adminEmail) {
+            Mail::to($adminEmail)->send(new TicketCreatedMail($data, $ticket));
         }
 
         // Send notifcation to the ticket author.
-        $data=[
-            'email_template'=>'author','email_subject'=>'Ticket submitted.'
+        $data = [
+            'email_template' => 'author','email_subject' => 'Ticket submitted.'
         ];
         Mail::to($ticket->author_email)->send(new TicketCreatedMail($data, $ticket));
 
         // Response message.
-        $responseMessage = sprintf('Your ticket is submitted, we will be in touch. You can view the ticket status <a href="%s/tickets/%s" target="_blank"> here <i class="fa fa-external-link"></i></a>.', env('APP_URL'), $ticket->ticket_id);
+                $responseMessage = sprintf('Your ticket has been successfully submitted. We will be in touch soon. You can view the status of your ticket <a href="%s/tickets/%s" target="_blank"> here <i class="fa fa-external-link"></i></a>.', env('APP_URL'), $ticket->ticket_id);
 
         return redirect()->back()->with("status", $responseMessage);
     }
@@ -126,14 +124,15 @@ class TicketsController extends Controller
 
         if (Auth::user() && Auth::user()->is_admin === 1) {
             return view('admin.ticket-details', $viewData);
-        } else if (Auth::user() && Auth::user()->is_admin === 2) {
+        } elseif (Auth::user() && Auth::user()->is_admin === 2) {
             return view('agent.ticket-details', $viewData);
         }
 
         return view('tickets.single', $viewData);
     }
 
-    public function showByCurrentUser() {
+    public function showByCurrentUser()
+    {
 
         // $tickets = Ticket::where('user_id', Auth::user()->id)->paginate(10);
         // $categories = Category::all();
@@ -142,17 +141,18 @@ class TicketsController extends Controller
         // return view('tickets.list-user', $viewData);
     }
 
-    public function close($ticket_id) {
+    public function close($ticket_id)
+    {
 
         /**
          * Ony allowing authenticated users to ation the status update.
-         * 
+         *
          * Restricting status update to only administrator(s) and assigned agent(s)
-         * 
+         *
          * @TODO: Update e-mail functionality.
          */
         $closeTicket = false;
-        $notify = ['agent'=>false,'admin'=>false,'author'=>true]; //Flags to know whom to e-mail of this action.
+        $notify = ['agent' => false,'admin' => false,'author' => true]; //Flags to know whom to e-mail of this action.
         if (Auth::user()) {
             // Get the ticket to close.
             $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
@@ -160,7 +160,7 @@ class TicketsController extends Controller
             if (Auth::user()->is_admin === 1) {
                 $closeTicket = true;
                 $notify['agent'] = true;
-            } else if (Auth::user()->is_admin === 2) {
+            } elseif (Auth::user()->is_admin === 2) {
                 $notify['admin'] = true;
                 // Check if agent is assigned to this ticket.
                 if ($ticket->user_id === Auth::user()->id) {
@@ -174,7 +174,7 @@ class TicketsController extends Controller
                 /**
                  * App\Mail\TicketStatusMail expects parameter 2 to be a User instance.
                  * Therefore create such instance from ticket object data.
-                 * 
+                 *
                  * @TODO: Refactor emailing logic.
                  */
                 $author = new User();
@@ -188,9 +188,6 @@ class TicketsController extends Controller
                 return redirect()->back()->with("status", "Ticket closed.");
             }
         }
-
-        
-
     }
 
 
@@ -209,7 +206,6 @@ class TicketsController extends Controller
         }
 
         return redirect()->back()->with("error", "You are not authorized to perform this action.");
-        
     }
 
     public function update(Request $request, Ticket $ticket)
@@ -228,14 +224,14 @@ class TicketsController extends Controller
                 'status'        =>  $request->input('status'),
                 'ticket_id'        =>  $request->input('ticket_id'),
             ];
-            // dd($input);            
+            // dd($input);
 
             $ticket = Ticket::where('ticket_id', $input['ticket_id'])->firstOrFail();
             // Check if we should notify agent.
             if (!empty($input['user_id'])) {
                 if ($ticket->user_id !== $input['user_id']) {
                     $agentEmail = User::where('id', $input['user_id'])->firstOrFail()->email;
-                    $data = ['email_template'=>"agent", 'email_subject'=>"Assigned To A Ticket."];
+                    $data = ['email_template' => "agent", 'email_subject' => "Assigned To A Ticket."];
                     Mail::to($agentEmail)->send(new \App\Mail\TicketAssignedMail($data, $ticket));
                 }
             }
@@ -251,7 +247,7 @@ class TicketsController extends Controller
 
             $ticket->save();
 
-            return redirect('/admin/tickets/edit/'.$ticket->ticket_id)->with('status', 'Ticket has been updated');
+            return redirect('/admin/tickets/edit/' . $ticket->ticket_id)->with('status', 'Ticket has been updated');
         }
     }
 
@@ -259,7 +255,7 @@ class TicketsController extends Controller
     {
         /**
          * Check if the deleting user is logged in.
-         * 
+         *
          * Restrict deleting to an administrator user.
          */
 
@@ -270,8 +266,6 @@ class TicketsController extends Controller
                 return redirect('/admin/tickets')->with('status', sprintf('Ticket <strong>#%s</strong> has been sucessfully removed.', $ticket_id));
             }
         }
-        return redirect()->back()-with('errors', 'Action not allowed.');
+        return redirect()->back() - with('errors', 'Action not allowed.');
     }
-
-
 }

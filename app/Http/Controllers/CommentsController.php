@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Mail;
 
 class CommentsController extends Controller
 {
-
-
     public function __construt()
     {
         $this->middleware('auth');
@@ -39,13 +37,13 @@ class CommentsController extends Controller
                 'user_id' => Auth::user()->id,
             ]);
 
-            $assignedAgent=null;
+            $assignedAgent = null;
             /**
              * See if this ticket has been assigned to an agent.
-             * 
+             *
              * See who is making this comment. We do not want to email the user
              * making this comment.
-             * 
+             *
              * If an agent is assigned we do not want to email them if they are
              * the one making this comment.
              */
@@ -60,7 +58,7 @@ class CommentsController extends Controller
 
                     /**
                      * We can now e-mail ticket author and assigned agent about the newly added comment.
-                     * 
+                     *
                      * What if its the ticket author making the comment?
                      * - For now we are not worried if this was the ticket author making
                      * - the comment. We intend to e-mail the ticket author of every change that
@@ -68,21 +66,19 @@ class CommentsController extends Controller
                      */
 
                     $emails = [$assignedAgent->email, $comment->ticket->author_email];
-                }
-                else {
+                } else {
                     // Just e-mailing the ticket author.
                     $emails = [$comment->ticket->author_email]; // @TODO: Add administrator.
                 }
-            }
-            else {
+            } else {
                 // Just e-mailing the ticket author.
                 $emails = [$comment->ticket->author_email]; // @TODO: Add administrator.
             }
-            foreach($emails as $key => $value) {
-                Mail::to($value)->send(new TicketCommentMail(Auth::user(),$comment->ticket,$comment));
+            foreach ($emails as $key => $value) {
+                Mail::to($value)->send(new TicketCommentMail(Auth::user(), $comment->ticket, $comment));
             }
 
-            return redirect()->back()->with('status','Your comment has been submitted.');
+            return redirect()->back()->with('status', 'Your comment has been submitted.');
         }
         return;
     }

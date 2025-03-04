@@ -7,7 +7,6 @@ use Illuminate\Http\UploadedFile;
 
 class BooksImportFileRule implements Rule
 {
-
     protected $validExtensions = [
       'csv', 'xls', 'xlsx'
     ];
@@ -33,7 +32,7 @@ class BooksImportFileRule implements Rule
      */
     public function passes($attribute, $value)
     {
-        return in_array(strtolower($this->file->getClientOriginalExtension()),$this->validExtensions);
+        return in_array(strtolower($this->file->getClientOriginalExtension()), $this->validExtensions);
     }
 
     /**

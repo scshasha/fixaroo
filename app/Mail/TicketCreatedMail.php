@@ -11,7 +11,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TicketCreatedMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     protected $data = [];
     protected $template = '';
@@ -25,7 +26,7 @@ class TicketCreatedMail extends Mailable
         $this->subject($data['email_subject']);
         $this->template = $data['email_template'];
         $this->data = [
-            'uri' => sprintf('%s/%s/%s', env('APP_URL'), ($this->template === 'admin') ? 'admin/tickets':'tickets', $ticket->ticket_id),
+            'uri' => sprintf('%s/%s/%s', env('APP_URL'), ($this->template === 'admin') ? 'admin/tickets' : 'tickets', $ticket->ticket_id),
         ];
     }
 
