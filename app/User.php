@@ -40,7 +40,8 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return mixed
      */
-    public function getJWTIdentifier() {
+    public function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
@@ -49,29 +50,33 @@ class User extends Authenticatable implements JWTSubject
      *
      * @return array
      */
-    public function getJWTCustomClaims() {
+    public function getJWTCustomClaims()
+    {
         return ['user' => ['id' => $this->id]];
     }
 
 
-    public function setPasswordAttribute($value) {
+    public function setPasswordAttribute($value)
+    {
         if (!empty($value)) {
-          $this->attributes['password'] = bcrypt($value);
+            $this->attributes['password'] = bcrypt($value);
         }
     }
 
-        
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONSHIPS
     |--------------------------------------------------------------------------
     */
 
-    public function tickets() {
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 
-    public function comments() {
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 

@@ -100,15 +100,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <i class="fa fa-ticket"></i>helpdesk<span class="dot-style">.</span>io 
+                    <i class="fa fa-ticket"></i><br />fixaroo<span class="dot-style"></span>
                 </div>
                 <div class="subtitle">
-                    <p>support ticket platform</p>
+                    <p>Where every ticket gets a roo-tine fix!</p>
                 </div>
                 @auth
                 @else
-                    <p class="muted">Please <a href="{{ route('login') }}">login</a> to your account to get started.</p>
-                    <p class="muted">Don't have an account? No worries, our easy to use registration form is over <a href="{{ route('register') }}">here</a>.</p>
+                    <p class="muted">Hey there! Please <a href="{{ route('login') }}">log in</a> to get started.</p>
+                    <p class="muted">New around here? No worries! <a href="{{ route('register') }}">Sign up</a> in just a few clicks.</p>
                 @endauth
             </div>
         </div>

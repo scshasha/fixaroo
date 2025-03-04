@@ -9,7 +9,8 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TicketAssignedMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     protected $data = [];
 

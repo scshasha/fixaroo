@@ -11,18 +11,20 @@ class Comment extends Model
         'comment', 'user_id', 'ticket_id',
     );
 
-    
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONSHIPS
     |--------------------------------------------------------------------------
     */
 
-    public function ticket() {
+    public function ticket()
+    {
         return $this->belongsTo(Ticket::class);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }

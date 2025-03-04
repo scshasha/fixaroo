@@ -11,7 +11,8 @@ class Category extends Model
         'name'
     );
 
-    public function tickets() {
+    public function tickets()
+    {
         return $this->hasMany(Ticket::class);
     }
 }

@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         if (Auth::user()->is_admin == 1) {
             return redirect('/admin');
-        } elseif(Auth::user()->is_admin == 2) {
+        } elseif (Auth::user()->is_admin == 2) {
             return redirect('/dashboard');
         }
 
@@ -40,7 +40,6 @@ class HomeController extends Controller
         if (Auth::user()->is_admin === 1) {
             return view('dashboard');
         }
-            
     }
 
     public function agentDashboard()
@@ -48,6 +47,5 @@ class HomeController extends Controller
         if (Auth::user()->is_admin === 2) {
             return view('agent-dashboard');
         }
-
     }
 }

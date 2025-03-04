@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+
 /*
  * ---------------------------------------------------------------------------------
  * UNAUTHORISED API ROUTES
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 //  Route::post('register', 'UserController@register');
 //  Route::post('login', 'UserController@authenticate');
 //  Route::get('test/open', 'BookController@testOpen');
- 
+
 
  /*
   * ---------------------------------------------------------------------------------
@@ -18,6 +19,5 @@ use Illuminate\Http\Request;
   */
  Route::group([
    'middleware' => ['jwt.auth'],
- ], function() {
-
+ ], function () {
  });

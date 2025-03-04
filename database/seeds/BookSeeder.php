@@ -19,7 +19,7 @@ class BookSeeder extends Seeder
     {
 
         if (!$file) {
-          $file = env('BOOKS_CSV_API');
+            $file = env('BOOKS_CSV_API');
         }
 
         // Make the file smaller...
@@ -57,6 +57,5 @@ class BookSeeder extends Seeder
 
 
         // (new Book())->import();
-
     }
 }

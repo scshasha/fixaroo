@@ -14,14 +14,13 @@ class CategoryTableSeeder extends Seeder
     {
         Category::truncate();
 
-        Category::create(array('name'=>'Bug'));
-        Category::create(array('name'=>'Backlog'));
-        Category::create(array('name'=>'Feature Request'));
-        Category::create(array('name'=>'Sales Question'));
-        Category::create(array('name'=>'How To'));
-        Category::create(array('name'=>'Cancellation'));
-        Category::create(array('name'=>'Technical Issue'));
-        Category::create(array('name'=>'Uncategorized'));
-        
+        Category::create(array('name' => 'Bug'));
+        Category::create(array('name' => 'Backlog'));
+        Category::create(array('name' => 'Feature Request'));
+        Category::create(array('name' => 'Sales Question'));
+        Category::create(array('name' => 'How To'));
+        Category::create(array('name' => 'Cancellation'));
+        Category::create(array('name' => 'Technical Issue'));
+        Category::create(array('name' => 'Uncategorized'));
     }
 }

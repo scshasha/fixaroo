@@ -23,7 +23,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
 
     /**
@@ -64,14 +63,15 @@ class RegisterController extends Controller
      * @param  Illuminate\Http\Request $request
      * @return \App\User
      */
-    protected function create(array $request) {
+    protected function create(array $request)
+    {
         $data = array(
           'name' => $request['name'],
           'email' => $request['email'],
           'password' => $request['password'],
           'password_confirmation' => $request['password'],
         );
-        
+
         $this->validator($data);
 
         $user = new User(array(
@@ -83,16 +83,16 @@ class RegisterController extends Controller
         $user->save();
 
         $this->emailNotification($request);
-        
+
         // auth()->login($user);
 
         return $user;
-
     }
 
-    protected function emailNotification($request)  {
+    protected function emailNotification($request)
+    {
         Mail::to($request['email'])->send(
-            new AccountCreatedMail($request['name'], $request['email']
-        ));
+            new AccountCreatedMail($request['name'], $request['email'])
+        );
     }
 }

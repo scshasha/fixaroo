@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use \App\Book;
-use \App\Helpers\BookImporter;
-
+use App\Book;
+use App\Helpers\BookImporter;
 
 class ImportBooks extends Command
 {
@@ -43,13 +42,13 @@ class ImportBooks extends Command
         $filesInPath = resource_path('csv-import-queue/*.csv');
 
         // 4 = amount files to process at a time..
-        foreach(array_slice(glob($filesInPath), 0, 4) as $file) {
+        foreach (array_slice(glob($filesInPath), 0, 4) as $file) {
             $data = array_map('str_getcsv', file($file));
 
-            foreach($data as $row) {
+            foreach ($data as $row) {
                 $record = BookImporter::processFileDataRow($row);
                 if ($record->valid) {
-                  (new Book())->create($record->data);
+                    (new Book())->create($record->data);
                   // Book::firstOrCreate(
                   //   [
                   //     'publication_year'=>$record->data['publication_year'],
@@ -62,9 +61,8 @@ class ImportBooks extends Command
                   //     'image'=>$record->data['image'],
                   //     'total_ratings'=>$record->data['total_ratings'],
                   //   ], $record->data);
-
                 }
-                
+
                 unlink($file);
             }
         }
