@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-dark p-0">
-    <a href="{{ url('/') }}" class="navbar-brand mr-4"><i class="fa fa-ticket mr-md-2"></i>fixaroo<span class="dot-style"></span></a>
+    <a href="{{ url('/') }}" class="navbar-brand mr-4"><i class="fa fa-ticket mr-md-2"></i>{{ env('APP_NAME', 'Laravel app') }}<span class="dot-style"></span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

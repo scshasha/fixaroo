@@ -100,10 +100,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <i class="fa fa-ticket"></i><br />fixaroo<span class="dot-style"></span>
+                    <i class="fa fa-ticket"></i><br />{{ env('APP_NAME', 'Laravel app') }}<span class="dot-style"></span>
                 </div>
                 <div class="subtitle">
-                    <p>Where every ticket gets a roo-tine fix!</p>
+                    <p>{{ env('APP_TAGLINE', 'Laravel app tagline) }}</p>
                 </div>
                 @auth
                 @else
