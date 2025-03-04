@@ -103,7 +103,7 @@
                     <i class="fa fa-ticket"></i><br />{{ env('APP_NAME', 'Laravel app') }}<span class="dot-style"></span>
                 </div>
                 <div class="subtitle">
-                    <p>{{ env('APP_TAGLINE', 'Laravel app tagline) }}</p>
+                    <p>{{ env('APP_TAGLINE', 'Laravel app tagline') }}</p>
                 </div>
                 @auth
                 @else
