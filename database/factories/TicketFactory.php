@@ -4,6 +4,7 @@ use App\User;
 use App\Ticket;
 use App\Category;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 $factory->define(Ticket::class, function (Faker $faker) {
 
@@ -19,7 +20,7 @@ $factory->define(Ticket::class, function (Faker $faker) {
         "priority" => $priority[$faker->numberBetween(0, 2)],
         "status" => "Open",
         "user_id" => $faker->numberBetween(2, 6),
-        "ticket_id" => strtoupper(str_random(15)),
+        "ticket_id" => strtoupper(Str::random(15)),
         "category_id" => Category::all()->random()->id,
         "author_name" => $faker->name,
         "author_email" => $faker->email,

@@ -10,6 +10,7 @@ use App\Mail\TicketCreatedMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class TicketsController extends Controller
 {
@@ -69,7 +70,7 @@ class TicketsController extends Controller
 
         $input = [
             'title'         =>  $request->input('title'),
-            'ticket_id'     =>  strtoupper(str_random(15)),
+            'ticket_id'     =>  strtoupper(Str::random(15)),
             'message'       =>  $request->input('message'),
             'author_name'   =>  $request->input('author_name'),
             'author_email'  =>  $request->input('author_email'),
