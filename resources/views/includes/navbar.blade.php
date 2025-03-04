@@ -13,7 +13,7 @@
         <ul class="navbar-nav ml-md-auto mt-2 navbar-top-links pull-right">
             <li id="dropdown-user" class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle text-right nav-item mr-md-2 p-2" id="bd-profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="pull-right"> <img src="@if (Auth::user()->id < 4) {{ url('img/av'.Auth::user()->id.'.png') }}@else{{ url('img/user.png') }}@endif" class="img-circle img-user media-object" alt="Profile Picture"> </span>
+                    <span class="pull-right"> <img src="{{ url('img/user.png') }}" class="img-circle img-user media-object" alt="Profile Picture"> </span>
                     <div class="username hidden-xs">{{ ucfirst(Auth::user()->name) }}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right with-arrow">
