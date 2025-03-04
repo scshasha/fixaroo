@@ -32,11 +32,5 @@ class UsersTableSeeder extends Seeder
           'password' => Hash::make(env('EXAMPLE_AGENT2_PASSWORD', 'Password123')),
           'is_admin' => 2,
         ]);
-		    User::create([
-			    'name' => 'Root',
-			    'email' => 'root@example.com',
-			    'password' => 'Root123',
-			    'is_admin' => 1,
-		    ]);
     }
 }
