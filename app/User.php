@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -59,7 +60,10 @@ class User extends Authenticatable implements JWTSubject
     public function setPasswordAttribute($value)
     {
         if (!empty($value)) {
-            $this->attributes['password'] = bcrypt($value);
+						if (!$this->isBcryptHash($value)) {
+							$value = bcrypt($value);
+						}
+						$this->attributes['password'] = $value;
         }
     }
 
@@ -69,12 +73,18 @@ class User extends Authenticatable implements JWTSubject
     | RELATIONSHIPS
     |--------------------------------------------------------------------------
     */
-
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
     }
-
+	
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
     public function comments()
     {
         return $this->hasMany(Comment::class);
@@ -84,4 +94,16 @@ class User extends Authenticatable implements JWTSubject
     // public function user_books() {
     //   return $this->belongsToMany(UserBook::class);
     // }
+	
+	
+	/**
+	 * Check if the string looks like a bcrypt hash (used by Laravel)
+	 *
+	 * @param $hash
+	 * @return bool
+	 */
+		protected function isBcryptHash($hash) {
+				$regex = '#^\$2y\$\d{2}\$[./A-Za-z0-9]{53}$#';
+				return is_string($hash) && preg_match($regex, $hash) === 1;
+		}
 }

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar bg-dark p-0">
-    <a href="{{ url('/') }}" class="navbar-brand mr-4"><i class="fa fa-ticket mr-md-2"></i>fixaroo<span class="dot-style"></span></a>
+    <a href="{{ url('/') }}" class="navbar-brand mr-4"><i class="fa fa-ticket mr-md-2"></i>{{ env('APP_NAME', 'Laravel app') }}<span class="dot-style"></span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,7 +13,7 @@
         <ul class="navbar-nav ml-md-auto mt-2 navbar-top-links pull-right">
             <li id="dropdown-user" class="dropdown nav-item">
                 <a href="#" class="dropdown-toggle text-right nav-item mr-md-2 p-2" id="bd-profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="pull-right"> <img src="@if (Auth::user()->id < 4) {{ url('img/av'.Auth::user()->id.'.png') }}@else{{ url('img/user.png') }}@endif" class="img-circle img-user media-object" alt="Profile Picture"> </span>
+                    <span class="pull-right"> <img src="{{ url('img/user.png') }}" class="img-circle img-user media-object" alt="Profile Picture"> </span>
                     <div class="username hidden-xs">{{ ucfirst(Auth::user()->name) }}</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right with-arrow">
