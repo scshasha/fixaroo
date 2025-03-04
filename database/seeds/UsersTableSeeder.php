@@ -27,14 +27,17 @@ class UsersTableSeeder extends Seeder
 		$adminEmail = readline('Enter Admin Email (default: ' . env('SAMPLE_USER_EMAIL', 'admin@example.com') . '): ') ?: env('SAMPLE_USER_EMAIL', 'admin@example.com');
 		$adminPassword = readline('Enter Admin Password (default: ' . env('SAMPLE_USER_PASSWORD', $admin_default_pswd) . '): ') ?: env('SAMPLE_USER_PASSWORD', $admin_default_pswd);
 		
-		User::create([
-			'name' => $adminName,
-			'email' => $adminEmail,
-			'password' => Hash::make($adminPassword),
-			'is_admin' => 1, // Admin role
-		]);
+		// Check if admin email exists, otherwise create a new user.
+		User::firstOrCreate(
+			['email' => $adminEmail],
+			[
+				'name' => $adminName,
+				'password' => Hash::make($adminPassword),
+				'is_admin' => 1, // Admin role
+			]
+		);
 		
-		echo "\nAdmin user created successfully!\n\n";
+		echo "\nAdmin user created or already exists!\n\n";
 		
 		// Ensure at least 1 agent (second user).
 		echo "Creating Support Desk Agent User (Mandatory)\n";
@@ -43,14 +46,17 @@ class UsersTableSeeder extends Seeder
 		$agentEmail = readline('Enter Agent Email (default: ' . env('SAMPLE_USER_EMAIL', 'agent@example.com') . '): ') ?: env('SAMPLE_USER_EMAIL', 'agent@example.com');
 		$agentPassword = readline('Enter Agent Password (default: ' . env('SAMPLE_USER_PASSWORD', $agent_default_pswd) . '): ') ?: env('SAMPLE_USER_PASSWORD', $agent_default_pswd);
 		
-		User::create([
-			'name' => $agentName,
-			'email' => $agentEmail,
-			'password' => Hash::make($agentPassword),
-			'is_admin' => 2, // Agent role
-		]);
+		// Check if agent email exists, otherwise create a new user.
+		User::firstOrCreate(
+			['email' => $agentEmail],
+			[
+				'name' => $agentName,
+				'password' => Hash::make($agentPassword),
+				'is_admin' => 2, // Agent role
+			]
+		);
 		
-		echo "\nAgent user created successfully!\n\n";
+		echo "\nAgent user created or already exists!\n\n";
 		
 		// Ask if additional users should be created.
 		$additionalCount = (int) readline('How many additional users would you like to create? (Enter 0 for none): ') ?: 0;
@@ -87,14 +93,17 @@ class UsersTableSeeder extends Seeder
 					break;
 			}
 			
-			User::create([
-				'name' => $name,
-				'email' => $email,
-				'password' => Hash::make($password),
-				'is_admin' => $isAdmin,
-			]);
+			// Check if the user with the email exists, otherwise create a new user.
+			User::firstOrCreate(
+				['email' => $email],
+				[
+					'name' => $name,
+					'password' => Hash::make($password),
+					'is_admin' => $isAdmin,
+				]
+			);
 			
-			echo "User #$i created successfully!\n";
+			echo "User #$i created or already exists!\n";
 		}
 		
 		echo "\nUser seeding complete!\n";
