@@ -9,7 +9,10 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "~1.0",
+        "php-parallel-lint/php-console-color": "^1.0",
+        "php-parallel-lint/php-console-highlighter": "^1.0",
         "predis/predis": "^1.1",
+        "symfony/error-handler": "^4.4",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
