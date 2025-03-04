@@ -108,5 +108,15 @@ ddev exec php artisan db:seed
 
 ---
 
+### Example Users (For Local Development)
+
+| Role  | Email             | Password    |
+|-------|-------------------|-------------|
+| Admin | admin@example.com | password123 |
+| Agent | agent@example.com | password123 |
+| Agent | agent2@example.com | password123 |
+
+---
+
 ✨ Happy Fixing with Fixaroo!
 If you have any questions or want to contribute, feel free to submit a pull request or open an issue.
