@@ -12,27 +12,25 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
         $faker = Faker\Factory::create();
-        // Truncate table
         User::truncate();
-
-        // Create Admin User
         User::create([
-            'name' => $faker->firstName,
-            'email' => 'admin@example.com',
-            'is_admin' => 1,
-            'password' => 'fixaroo',
+          'name' => env('EXAMPLE_ADMIN_NAME', $faker->firstName),
+          'email' => env('EXAMPLE_ADMIN_EMAIL', 'admin@example.com'),
+          'password' => Hash::make(env('EXAMPLE_ADMIN_PASSWORD', Hash::make('password123'))),
+          'is_admin' => 1,
         ]);
-
-        // Create 5 Agent Users
-        for($i=1;$i <= 5;$i++) {
-            User::create([
-                'name' => $faker->firstName,
-                'email' => sprintf('fixaroo%d@example.com', $i),
-                'is_admin' => 2,
-                'password' => 'fixaroo',
-            ]);
-        }
+        User::create([
+          'name' => env('EXAMPLE_AGENT_1_NAME', $faker->firstName),
+          'email' => env('EXAMPLE_AGENT_1_EMAIL', 'agent@example.com'),
+          'password' => Hash::make(env('EXAMPLE_AGENT_1_PASSWORD', Hash::make('password123'))),
+          'is_admin' => 2,
+        ]);
+        User::create([
+          'name' => env('EXAMPLE_AGENT_2_NAME', $faker->firstName),
+          'email' => env('EXAMPLE_AGENT_2_EMAIL', 'agent2@example.com'),
+          'password' => Hash::make(env('EXAMPLE_AGENT_2_PASSWORD', Hash::make('password123'))),
+          'is_admin' => 2,
+        ]);
     }
 }
