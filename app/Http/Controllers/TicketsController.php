@@ -106,7 +106,7 @@ class TicketsController extends Controller
         Mail::to($ticket->author_email)->send(new TicketCreatedMail($data, $ticket));
 
         // Response message.
-        $responseMessage = sprintf('Your ticket is submitted, we will be in touch. You can view the ticket status <a href="%s/tickets/%s" target="_blank"> here <i class="fa fa-external-link"></i></a>.', env('APP_URL'), $ticket->ticket_id);
+				$responseMessage = sprintf('Your ticket has been successfully submitted. We will be in touch soon. You can view the status of your ticket <a href="%s/tickets/%s" target="_blank"> here <i class="fa fa-external-link"></i></a>.', env('APP_URL'), $ticket->ticket_id);
 
         return redirect()->back()->with("status", $responseMessage);
     }
