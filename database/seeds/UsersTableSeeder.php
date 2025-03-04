@@ -27,7 +27,13 @@ class UsersTableSeeder extends Seeder
 		$adminEmail = readline('Enter Admin Email (default: ' . env('SAMPLE_USER_EMAIL', 'admin@example.com') . '): ') ?: env('SAMPLE_USER_EMAIL', 'admin@example.com');
 		$adminPassword = readline('Enter Admin Password (default: ' . env('SAMPLE_USER_PASSWORD', $admin_default_pswd) . '): ') ?: env('SAMPLE_USER_PASSWORD', $admin_default_pswd);
 		
-		// Check if admin email exists, otherwise create a new user.
+		// Check if admin email exists and if the role differs.
+		$existingAdmin = User::where('email', $adminEmail)->first();
+		if ($existingAdmin && $existingAdmin->is_admin != 1) {
+			echo "Email $adminEmail is already in use by a user with a different role. Suggested alternative: " . $faker->email . "\n";
+			$adminEmail = readline('Enter a different Admin Email: ') ?: $faker->email;
+		}
+		
 		User::firstOrCreate(
 			['email' => $adminEmail],
 			[
@@ -46,7 +52,13 @@ class UsersTableSeeder extends Seeder
 		$agentEmail = readline('Enter Agent Email (default: ' . env('SAMPLE_USER_EMAIL', 'agent@example.com') . '): ') ?: env('SAMPLE_USER_EMAIL', 'agent@example.com');
 		$agentPassword = readline('Enter Agent Password (default: ' . env('SAMPLE_USER_PASSWORD', $agent_default_pswd) . '): ') ?: env('SAMPLE_USER_PASSWORD', $agent_default_pswd);
 		
-		// Check if agent email exists, otherwise create a new user.
+		// Check if agent email exists and if the role differs.
+		$existingAgent = User::where('email', $agentEmail)->first();
+		if ($existingAgent && $existingAgent->is_admin != 2) {
+			echo "Email $agentEmail is already in use by a user with a different role. Suggested alternative: " . $faker->email . "\n";
+			$agentEmail = readline('Enter a different Agent Email: ') ?: $faker->email;
+		}
+		
 		User::firstOrCreate(
 			['email' => $agentEmail],
 			[
@@ -93,7 +105,13 @@ class UsersTableSeeder extends Seeder
 					break;
 			}
 			
-			// Check if the user with the email exists, otherwise create a new user.
+			// Check if the user with the email exists and if the role differs.
+			$existingUser = User::where('email', $email)->first();
+			if ($existingUser && $existingUser->is_admin != $isAdmin) {
+				echo "Email $email is already in use by a user with a different role. Suggested alternative: " . $faker->email . "\n";
+				$email = readline('Enter a different email: ') ?: $faker->email;
+			}
+			
 			User::firstOrCreate(
 				['email' => $email],
 				[
