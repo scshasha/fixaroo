@@ -1,0 +1,102 @@
+// Welcome styles
+.welcome {
+  &.getting-started-navbar {
+    position: absolute;
+    //right: ;
+  }
+}
+
+// Top-right positioning
+.top-right {
+  position: absolute;
+  right: 10px;
+  top: 18px;
+}
+
+// Content styles
+.content {
+  text-align: center;
+}
+
+// Title styling
+.title {
+  font-size: 84px;
+  letter-spacing: 5px;
+}
+
+// Link styles
+.links {
+  > a {
+    color: $text-color;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
+
+// Margin bottom utility
+.m-b-md {
+  margin-bottom: 30px;
+}
+
+// Dot style for specific elements
+.dot-style {
+  color: $brand-danger;
+}
+
+// Muted styles
+.muted {
+  font-size: 0.737em;
+}
+
+.muted a, .btn-link {
+  color: $text-color;
+}
+
+// Subtitle styling
+.subtitle {
+  margin-top: -1em;
+  margin-bottom: 5em;
+  letter-spacing: 2px;
+}
+
+// Button styles
+.btn {
+  &-default {
+    color: $btn-default-color;
+    background-color: $body-bg;
+    border: 1px solid $laravel-border-color;
+
+    &:hover {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+    }
+  }
+}
+
+// Input styles
+.input {
+  border-color: $input-border;
+
+  &:focus {
+    border-color: $input-border-focus;
+  }
+
+  &::placeholder {
+    color: $input-color-placeholder;
+  }
+}
+
+// Panel styles
+.panel {
+  &-default {
+    border: 1px solid $panel-default-border;
+
+    &-heading {
+      background-color: $panel-default-heading-bg;
+    }
+  }
+}

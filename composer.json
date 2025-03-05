@@ -72,7 +72,12 @@
             "@composer clearcache --ansi",
             "@composer install --ansi",
             "@npm install"
-        ]
+        ],
+        "mixbuild": "@npx mix",
+        "post-install-cmd": [
+            "@composer run mixbuild"
+        ],
+        "mixwatch": "@npx mix watch"
     },
     "config": {
         "preferred-install": "dist",
