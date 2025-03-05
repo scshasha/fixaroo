@@ -1,0 +1,11 @@
+.footer {
+  background-color: $light-color;
+  padding: $spacing-md;
+  text-align: center;
+  border-top: 1px solid $border-color;
+
+  p {
+    color: $muted-text-color;
+    font-size: 0.875rem;
+  }
+}
