@@ -31,3 +31,41 @@ html, body {
 .position-ref {
   position: relative;
 }
+
+// Button styles
+.btn {
+  &-default {
+    color: $btn-default-color;
+    background-color: $body-bg;
+    border: 1px solid $laravel-border-color;
+
+    &:hover {
+      background-color: $brand-primary;
+      border-color: $brand-primary;
+    }
+  }
+}
+
+// Input styles
+.input {
+  border-color: $input-border;
+
+  &:focus {
+    border-color: $input-border-focus;
+  }
+
+  &::placeholder {
+    color: $input-color-placeholder;
+  }
+}
+
+// Panel styles
+.panel {
+  &-default {
+    border: 1px solid $panel-default-border;
+
+    &-heading {
+      background-color: $panel-default-heading-bg;
+    }
+  }
+}

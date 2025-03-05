@@ -73,11 +73,11 @@
             "@composer install --ansi",
             "@npm install"
         ],
-        "mixbuild": "@npx mix",
+        "mixbuild": "npx mix",
         "post-install-cmd": [
             "@composer run mixbuild"
         ],
-        "mixwatch": "@npx mix watch"
+        "mixwatch": "npx mix watch"
     },
     "config": {
         "preferred-install": "dist",

@@ -1,6 +1,7 @@
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,600");
+@import 'font-awesome/scss/font-awesome';
 
 // Variables
 @import "variables";
@@ -8,5 +9,11 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Bourbon
+@import "bourbon";
+
 // Base
 @import "base";
+
+// Welcome Component
+@import "components/welcome";
