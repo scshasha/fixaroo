@@ -1,28 +1,36 @@
 <?php
 
-use App\User;
-use App\Ticket;
-use App\Category;
-use Faker\Generator as Faker;
+namespace Database\Factories;
+
+use App\Models\User;
+use App\Models\Ticket;
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-$factory->define(Ticket::class, function (Faker $faker) {
-
-    // @TODO: user_id must change to asignee_id or agent_id or asigned_to_id
-
-    // User::all()->random()->id
-    // Category::where('name', 'Uncategorized')->firstOrFail()->id,
-
-    $priority = array('low','medium','high');
-    return [
-        "title" => $faker->sentence,
-        "message" => $faker->paragraph,
-        "priority" => $priority[$faker->numberBetween(0, 2)],
-        "status" => "Open",
-        "user_id" => $faker->numberBetween(2, 6),
-        "ticket_id" => strtoupper(Str::random(15)),
-        "category_id" => Category::all()->random()->id,
-        "author_name" => $faker->name,
-        "author_email" => $faker->email,
-    ];
-});
+class TicketFactory extends Factory
+{
+	protected $model = Ticket::class;
+	
+	/**
+	 * Define the model's default state.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function definition(): array
+	{
+		$priority = ['low', 'medium', 'high'];
+		
+		return [
+			'title' => $this->faker->sentence,
+			'message' => $this->faker->paragraph,
+			'priority' => $this->faker->randomElement($priority),
+			'status' => 'Open',
+			'user_id' => User::query()->inRandomOrder()->first()->id,
+			'ticket_id' => strtoupper(Str::random(15)),
+			'category_id' => Category::query()->inRandomOrder()->first()->id,
+			'author_name' => $this->faker->name,
+			'author_email' => $this->faker->email,
+		];
+	}
+}

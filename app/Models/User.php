@@ -1,10 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -103,7 +102,6 @@ class User extends Authenticatable implements JWTSubject
 	 * @return bool
 	 */
 		protected function isBcryptHash($hash) {
-				$regex = '#^\$2y\$\d{2}\$[./A-Za-z0-9]{53}$#';
-				return is_string($hash) && preg_match($regex, $hash) === 1;
+				return is_string($hash) && preg_match('#^\$2y\$\d{2}\$[./A-Za-z0-9]{53}$#', $hash) === 1;
 		}
 }
