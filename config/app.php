@@ -174,10 +174,11 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\BookImportServiceProvider::class,
+		    App\Providers\ThemeServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        // App\Providers\BookImportServiceProvider::class,
 
     ],
 
