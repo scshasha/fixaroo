@@ -1,0 +1,33 @@
+.sidebar {
+  width: 250px;
+  background-color: $light-color;
+  border-right: 1px solid $border-color;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ul {
+    list-style: none;
+    padding: $spacing-md;
+
+    li {
+      margin-bottom: $spacing-sm;
+
+      a {
+        color: $text-color;
+        text-decoration: none;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+
+  .sidebar-footer {
+    padding: $spacing-md;
+    font-size: 0.875rem;
+    color: $muted-text-color;
+  }
+}

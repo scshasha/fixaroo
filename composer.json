@@ -73,11 +73,17 @@
             "@composer install --ansi",
             "@npm install"
         ],
-        "mixbuild": "npx mix",
-        "post-install-cmd": [
-            "@composer run mixbuild"
+        "clear-caches": [
+          "@php artisan config:clear",
+          "@php artisan route:clear",
+          "@php artisan cache:clear",
+          "@php artisan optimize:clear"
         ],
-        "mixwatch": "npx mix watch"
+        "post-install-cmd": [
+            "@composer run build-mix"
+        ],
+        "build-mix": "npx mix",
+        "watch-mix": "npx mix watch"
     },
     "config": {
         "preferred-install": "dist",
