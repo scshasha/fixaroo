@@ -54,7 +54,7 @@
                             <ul class="list-unstyled media-block">
                                 <li class="mar-btm">
                                     <div class="@if($ticket->user_id === $comment->user_id) {{'media-right'}}@else{{'media-left'}}@endif">
-                                        <img src="@if ($comment->user_id < 4) {{ url('img/av'.$comment->user_id.'.png') }}@else{{ url('img/user.png') }}@endif" alt="{{ $comment->user->name }}" class="img-responsive img-circle img-sm" />
+                                        <img src="@if(file_exists(public_path('img/' . $comment->user_id . '.png'))) {{ url('img/' . $comment->user_id . '.png') }}@else{{ url('img/user.png') }}@endif" alt="{{ $comment->user->name }}" class="img-responsive img-circle img-sm this-is-a-test" />
                                     </div>
                                     <div class="media-body pad-hor @if($ticket->user_id === $comment->user_id) {{'speech-right'}}@else{{'speech-left'}}@endif">
                                         <div class="speech">

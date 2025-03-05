@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Ticket;
-use App\Category;
-use App\Mail\TicketStatusMail;
 use App\Mail\TicketCreatedMail;
+use App\Mail\TicketStatusMail;
+use App\Models\Category;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;

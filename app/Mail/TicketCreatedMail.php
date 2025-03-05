@@ -2,12 +2,9 @@
 
 namespace App\Mail;
 
-use App\User;
-use App\Ticket;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TicketCreatedMail extends Mailable
 {
