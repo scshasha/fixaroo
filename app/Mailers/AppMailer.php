@@ -21,8 +21,8 @@ class AppMailer
     public function __construct(Mailer $mailer)
     {
         $this->mailer = $mailer;
-        $this->senderMail = env('APP_MAILER_SENDER_MAIL', 'admin@example.com');
-        $this->senderName = env('APP_MAILER_SENDER_NAME', 'Sender Name');
+        $this->senderMail = env('MAIL_FROM_ADDRESS', 'hello@example.com');
+        $this->senderName = env('MAIL_FROM_NAME');
     }
 
     /**
