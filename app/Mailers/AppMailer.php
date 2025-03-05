@@ -2,8 +2,8 @@
 
 namespace App\Mailers;
 
+use App\Models\Ticket;
 use Illuminate\Contracts\Mail\Mailer;
-use App\Ticket;
 
 class AppMailer
 {
