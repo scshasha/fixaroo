@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 </head>
 <body>
-@include('components.navbar')
+@include('themes::fixaroo-base.components.navbar')
 
 <div class="container">
     @yield('content')
 </div>
 
-@include('components.footer')
+@include('themes::fixaroo-base.partials.footer')
 </body>
 </html>

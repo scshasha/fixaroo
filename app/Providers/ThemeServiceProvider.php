@@ -39,6 +39,6 @@ class ThemeServiceProvider extends ServiceProvider
 		{
 				// Dynamically add the active theme's view namespace based on the configuration
 				// This makes the views for the active theme accessible as 'theme.*' in the application
-				View::addNamespace('theme', resource_path("views/themes/" . config('themes.active')));
+				View::addNamespace('themes', resource_path('views/themes'));
 		}
 }
