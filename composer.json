@@ -67,23 +67,21 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-        "nuke": [
-            "rm -rf vendor node_modules",
-            "@composer clearcache --ansi",
-            "@composer install --ansi",
-            "@npm install"
-        ],
-        "clear-caches": [
-          "@php artisan config:clear",
-          "@php artisan route:clear",
+        "build-dev": [
+          "@php artisan view:clear",
           "@php artisan cache:clear",
-          "@php artisan optimize:clear"
+          "npm run mix:dev"
         ],
-        "post-install-cmd": [
-            "@composer run build-mix"
+        "build-mix": [
+          "@php artisan view:clear",
+          "@php artisan cache:clear",
+          "npm run mix:prod"
         ],
-        "build-mix": "npx mix",
-        "watch-mix": "npx mix watch"
+        "nuke": [
+          "rm -rf ./vendor/",
+          "@composer clear-cache --ansi",
+          "@composer install --ansi"
+        ]
     },
     "config": {
         "preferred-install": "dist",
