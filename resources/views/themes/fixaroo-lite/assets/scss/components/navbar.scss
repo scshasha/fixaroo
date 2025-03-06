@@ -1,0 +1,22 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $light-color;
+  padding: $spacing-sm $spacing-md;
+  border-bottom: 1px solid $border-color;
+
+  .navbar-brand {
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  .navbar-links a {
+    margin-left: $spacing-sm;
+    color: $text-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}

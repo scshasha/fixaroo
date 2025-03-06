@@ -1,0 +1,34 @@
+// Fonts & Fonts Faces
+@import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,600");
+
+@import 'font-awesome/scss/font-awesome';
+
+$font-family-base: 'Arial', sans-serif; // Base font family
+$font-size-base: 16px; // Base font size
+$line-height-base: 1.6; // Base line height
+$heading-font-weight: 600; // Font weight for headings
+$body-font-weight: 400; // Font weight for body text
+$small-font-size: 0.875rem; // Small text size
+$large-font-size: 1.25rem; // Large text size
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: $dark-color;
+  line-height: 1.3;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: $text-color;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    color: darken($primary-color, 10%);
+  }
+}
+

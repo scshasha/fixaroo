@@ -1,0 +1,16 @@
+@import "base/variables";
+@import "base/reset";
+@import "base/global";
+@import "base/layout";
+@import "base/typography";
+
+@import "components/buttons";
+@import "components/cards";
+@import "components/forms";
+
+@import "pages/about";
+@import "pages/home";
+
+@import "partials/footer";
+@import "partials/header";
+@import "partials/sidebar";
