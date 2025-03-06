@@ -1,37 +1,84 @@
 const mix = require('laravel-mix');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const activeTheme = process.env.ACTIVE_THEME || 'default-theme';
+
 /*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-// Debug
-console.log(`The active theme is ${activeTheme}`);
+|--------------------------------------------------------------------------
+| Mix Asset Management
+|--------------------------------------------------------------------------
+|
+| Mix provides a clean, fluent API for defining some Webpack build steps
+| for your Laravel application. By default, we are compiling the Sass
+| file for the application as well as bundling up all the JS files.
+|
+*/
+
+// Debug logs
+console.log(`Running in ${mix.inProduction() ? 'production' : 'development'} mode`);
+console.log(`The currently activated THEME is ${activeTheme}`);
 
 // Enable Vue processing
-// Compile theme-specific SCSS/JS
-mix.js(`resources/views/themes/${activeTheme}/assets/js/app.js`, `public/themes/${activeTheme}/js`)
-    .vue()
-    .sass(`resources/views/themes/${activeTheme}/assets/scss/app.scss`, `public/themes/${activeTheme}/css`)
-    .webpackConfig({
-        resolve: {
-            extensions: [".*",".wasm",".mjs",".js",".jsx",".json",".vue",".scss"]
-        }
-    });
+mix.vue();
 
-// Copy TinyMCE (same files for all themes OR customize per theme if necessary)
-mix.copyDirectory('node_modules/tinymce/icons', `public/themes/${activeTheme}/tinymce/icons`);
-mix.copyDirectory('node_modules/tinymce/plugins', `public/themes/${activeTheme}/tinymce/plugins`);
-mix.copyDirectory('node_modules/tinymce/skins', `public/themes/${activeTheme}/tinymce/skins`);
-mix.copyDirectory('node_modules/tinymce/themes', `public/themes/${activeTheme}/tinymce/themes`);
-mix.copy('node_modules/tinymce/tinymce.js', `public/themes/${activeTheme}/tinymce/tinymce.js`);
-mix.copy('node_modules/tinymce/tinymce.min.js', `public/themes/${activeTheme}/tinymce/tinymce.min.js`);
+// Add the CleanWebpackPlugin to remove old files
+mix.webpackConfig({
+    plugins: [
+        new CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: [
+                `public/themes/${activeTheme}/css/*`,
+                `public/themes/${activeTheme}/js/*`,
+                `public/themes/${activeTheme}/img/*`,
+                `public/themes/${activeTheme}/fonts/*`
+            ]
+        })
+    ],
+    resolve: {
+        extensions: [".js", ".jsx", ".json", ".vue", ".scss"]
+    }
+});
 
-// Below cannot be located on the installed package.
-// mix.copy('node_modules/tinymce/jquery.tinymce.js', 'public/node_modules/tinymce/jquery.tinymce.js');
-// mix.copy('node_modules/tinymce/jquery.tinymce.min.js', 'public/node_modules/tinymce/jquery.tinymce.min.js');
+// Combine and Minify JS Files for the Active Theme
+mix.scripts(
+    [
+        `resources/views/themes/${activeTheme}/assets/js/app.js`,
+        `resources/views/themes/${activeTheme}/assets/js/theme.js`
+    ],
+    `public/themes/${activeTheme}/js/all.js`
+);
+
+// Compile and Minify SCSS Files for the Active Theme
+[
+    'app.scss',
+].forEach(scssFile => {
+    mix.sass(
+        `resources/views/themes/${activeTheme}/assets/scss/${scssFile}`,
+        `public/themes/${activeTheme}/css`
+    );
+});
+
+// Copy asset directories (img, fonts, etc.) if they exist
+const assetDirs = ['img', 'fonts'];
+
+assetDirs.forEach(dir => {
+    mix.copyDirectory(
+        `resources/views/themes/${activeTheme}/assets/${dir}`,
+        `public/themes/${activeTheme}/${dir}`
+    );
+});
+
+// Copy TinyMCE core files and directories
+const tinymceAssets = [
+    { src: 'node_modules/tinymce/icons', dest: `public/themes/${activeTheme}/tinymce/icons` },
+    { src: 'node_modules/tinymce/plugins', dest: `public/themes/${activeTheme}/tinymce/plugins` },
+    { src: 'node_modules/tinymce/skins', dest: `public/themes/${activeTheme}/tinymce/skins` },
+    { src: 'node_modules/tinymce/themes', dest: `public/themes/${activeTheme}/tinymce/themes` },
+    { src: 'node_modules/tinymce/tinymce.js', dest: `public/themes/${activeTheme}/tinymce/tinymce.js` },
+    { src: 'node_modules/tinymce/tinymce.min.js', dest: `public/themes/${activeTheme}/tinymce/tinymce.min.js` }
+];
+
+tinymceAssets.forEach(({ src, dest }) => mix.copy(src, dest));
+
+// Enable versioning for production to avoid caching issues
+if (mix.inProduction()) {
+    mix.version();
+}

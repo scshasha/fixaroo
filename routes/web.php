@@ -20,13 +20,12 @@ use Illuminate\Support\Facades\Auth;
 // Default Route for root, check for theme-specific views dynamically
  Route::get('/', function () {
      $activeTheme = config('themes.active');
-     $viewName = "themes.{$activeTheme}.app";
-     
+     $viewName = "themes.{$activeTheme}.pages.home";
 		 if (view()->exists($viewName)) {
          return view($viewName);
      }
 		 
-     return view('theme::app');
+     return view('theme::home');
  });
 
 // Authentication Routes

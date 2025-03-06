@@ -7,12 +7,17 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "mix:build": "npx mix build",
+        "mix:watch": "npx mix watch",
+        "mix:dev": "npx mix",
+        "mix:prod": "npx mix --no-progress"
     },
     "devDependencies": {
         "@vue/compiler-sfc": "^3.5.13",
         "axios": "^1.8.1",
         "bootstrap-sass": "^3.3.7",
+        "clean-webpack-plugin": "^4.0.0",
         "cross-env": "^5.2.1",
         "jquery": "^3.2",
         "laravel-mix": "^6.0",
