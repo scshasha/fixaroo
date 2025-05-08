@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2aaeec0699d8286db6e37f45f6086984",
+    "content-hash": "0f0c41f6a4862eef48b6b2ee156e52a2",
     "packages": [
         {
             "name": "brick/math",
@@ -780,6 +780,69 @@
                 }
             ],
             "time": "2024-07-20T21:45:45+00:00"
+        },
+        {
+            "name": "igaster/laravel-theme",
+            "version": "v2.0.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/igaster/laravel-theme.git",
+                "reference": "184ce1538d1f231f532c046262d89ef58d4d59f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/igaster/laravel-theme/zipball/184ce1538d1f231f532c046262d89ef58d4d59f2",
+                "reference": "184ce1538d1f231f532c046262d89ef58d4d59f2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": ">=5.4"
+            },
+            "suggest": {
+                "orchestra/asset": "Use '@css' and '@js' in Blade files"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Theme": "Igaster\\LaravelTheme\\Facades\\Theme"
+                    },
+                    "providers": [
+                        "Igaster\\LaravelTheme\\themeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Igaster\\LaravelTheme\\": "src/",
+                    "Igaster\\LaravelTheme\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Giannis Gasteratos",
+                    "email": "igasteratos@gmail.com"
+                }
+            ],
+            "description": "Laravel Themes: Asset & Views folder per theme. Theme inheritance. Blade integration and more...",
+            "homepage": "https://github.com/Igaster/laravel-theme.git",
+            "keywords": [
+                "assets",
+                "blade",
+                "laravel",
+                "package",
+                "themes",
+                "views"
+            ],
+            "support": {
+                "issues": "https://github.com/igaster/laravel-theme/issues",
+                "source": "https://github.com/igaster/laravel-theme/tree/v2.0.24"
+            },
+            "time": "2025-03-04T07:27:32+00:00"
         },
         {
             "name": "laravel/framework",

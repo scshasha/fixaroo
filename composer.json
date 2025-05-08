@@ -9,6 +9,7 @@
         "ext-readline": "*",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^3.0",
+        "igaster/laravel-theme": "^2.0",
         "illuminate/support": "^8.0",
         "laravel/framework": "^8.0.0",
         "laravel/legacy-factories": "^1.4",

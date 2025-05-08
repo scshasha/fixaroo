@@ -10,18 +10,20 @@
     <link rel="stylesheet" href="{{ mix('themes/fixaroo-base/css/app.css') }}">
 </head>
 <body>
-<!-- Include Navbar -->
-@include('themes::fixaroo-base.components.navbar')
+<div class="welcome flex-center position-ref full-height">
+    <!-- Include Navbar -->
+    @include('themes::fixaroo-base.components.navbar')
 
-<!-- Main Content -->
-<div class="container">
-    @yield('content')
+    <!-- Main Content -->
+    <div class="container">
+        @yield('content')
+    </div>
+
+    <!-- Include Footer -->
+    @include('themes::fixaroo-base.partials.footer')
+
+    <!-- Load Combined JS -->
 </div>
-
-<!-- Include Footer -->
-@include('themes::fixaroo-base.partials.footer')
-
-<!-- Load Combined JS -->
 <script src="{{ mix('themes/fixaroo-base/js/all.js') }}"></script>
 </body>
 </html>
