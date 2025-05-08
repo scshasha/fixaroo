@@ -1,0 +1,8 @@
+# Tags
+stack=fullstack
+language=php
+framework=laravel
+db=mysql
+auth=jwt
+status=maintenance
+course=none
