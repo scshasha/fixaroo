@@ -1,0 +1,1 @@
+🕒 [2025-05-08 07:54:01] Spent time getting fixaroo-base theme to work, managed to get the styles to show, moved a components around as part of the refactor.
